@@ -1,13 +1,11 @@
 import React from 'react'
 import styled from 'styled-components';
 import { formatDistance } from 'date-fns';
-import Filter from '../Filter';
 
 function JobCard({ jobData }) {
 
     return (
         <Container>
-            <Filter />
             <JobsCard>
                 {jobData?.map(({ _id, companyName, designation, payRangeStart, salaryCurrency, city, country, createdAt, views }) => (
                     <Cards key={_id}>

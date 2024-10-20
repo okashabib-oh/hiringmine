@@ -26,8 +26,11 @@ const names = [
 ];
 
 
-const Filter = () => {
+const Filter = ({ filter }) => {
     const [personName, setPersonName] = React.useState([]);
+
+    const { filterationName, filterationOptions } = filter
+    console.log(filter);
 
     const handleChange = (event) => {
         const {
@@ -44,23 +47,23 @@ const Filter = () => {
                 <InputLabel id="demo-multiple-checkbox-label" size='small'
                     sx={{
                         color: 'slateblue'
-                    }}>Category</InputLabel>
+                    }}>{filterationName}</InputLabel>
                 <Select
                     labelId="demo-multiple-checkbox-label"
                     id="demo-multiple-checkbox"
                     multiple
                     value={personName}
                     onChange={handleChange}
-                    input={<OutlinedInput label="Category" />}
+                    input={<OutlinedInput label={filterationName} />}
                     renderValue={(selected) => selected.join(', ')}
                     MenuProps={MenuProps}
                     size='small'
                     color='secondary'
                 >
-                    {names.map((name) => (
-                        <MenuItem key={name} value={name} color='#212126'>
-                            <Checkbox checked={personName.includes(name)} color='secondary' size='small' />
-                            <ListItemText primary={name} />
+                    {filterationOptions?.map(({title}, index) => (
+                        <MenuItem key={index} value={title} color='#212126'>
+                            <Checkbox checked={personName.includes(title)} color='secondary' size='small' />
+                            <ListItemText primary={title} />
                         </MenuItem>
                     ))}
                     <Box display='flex' justifyContent='space-between' m={1}>

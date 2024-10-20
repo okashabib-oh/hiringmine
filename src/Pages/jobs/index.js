@@ -1,6 +1,8 @@
-import { Pagination, Stack } from "@mui/material";
+import { Button, Pagination, Stack } from "@mui/material";
 import JobCard from "../../components/JobCard";
 import { useEffect, useState } from "react";
+import Filter from "../../components/Filter";
+import useDataFetch from "../../CustomHooks/useDataFetch";
 
 function Jobs() {
 
@@ -18,6 +20,8 @@ function Jobs() {
                 setLoader(false);
             })
     }
+    const [{ data: filterations } = {}, filterationErr] = useDataFetch(`https://backend-prod.app.hiringmine.com/api/filterations/all`)
+
     useEffect(() => {
         getJobs()
     }, [pages])
@@ -28,6 +32,23 @@ function Jobs() {
             flexDirection: 'column',
             alignItems: 'center'
         }}>
+            <div style={{
+                display: 'flex',
+                overflowX: 'auto',
+                padding: '10px',
+                width: '100%',
+                boxSizing: 'border-box',
+                scrollbarWidth: 'thin',
+                scrollbarColor: '#6c63ff #e0e0e0',
+                msScrollbarArrowColor: '#6c63ff',
+                alignItems: 'center',
+            }}>
+                {filterations?.filteration?.map((filter, index) => (
+                    <Filter key={index} filter={filter} />
+                ))}
+                |
+                <Button color="secondary" variant="contained" sx={{ ml: 1 }}>Reset</Button>
+            </div>
             {loader ? (
                 <div style={{
                     display: 'flex',
