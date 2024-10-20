@@ -1,19 +1,15 @@
-import { formatDistance } from 'date-fns';
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components';
+import { formatDistance } from 'date-fns';
+import Filter from '../Filter';
 
-function LatestJobs({ latestJobs }) {
-    console.log(latestJobs);
+function JobCard({ jobData }) {
 
     return (
         <Container>
-            <h3>
-                <span>Latest and Top </span>
-                Job Openings
-            </h3>
-
+            <Filter />
             <JobsCard>
-                {latestJobs.slice(0, 8).map(({ _id, companyName, designation, payRangeStart, salaryCurrency, city, country, createdAt, views }) => (
+                {jobData?.map(({ _id, companyName, designation, payRangeStart, salaryCurrency, city, country, createdAt, views }) => (
                     <Cards key={_id}>
                         <CardHead>
                             <div>
@@ -48,41 +44,33 @@ function LatestJobs({ latestJobs }) {
     )
 }
 
-export default LatestJobs
+export default JobCard
 
 const Container = styled.div`
-    padding: 20px;
-    h3{
-        text-align: center;
-        font-size: 30px;
-    }
-    span {
-        color: #3E52CA;
-    }
 `
 
 const JobsCard = styled.div`
+    margin-top: 80px;
     font-size: 10px;
     display: grid;
-    grid-gap: 25px;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-gap: 15px;
+    grid-template-columns: repeat(2, minmax(500px, 1fr)); 
     max-width: 1200px;
-    margin: 0 auto;
+    margin-bottom: 20px;
 
     @media (max-width: 1024px) {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(300px, 1fr)); 
     }
 
-    // For small screens (mobile)
     @media (max-width: 768px) {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(200px, 1fr)); 
     }
 
-    // For extra small screens
     @media (max-width: 480px) {
-        grid-template-columns: repeat(1, minmax(0, 1fr));
+        grid-template-columns: repeat(1, minmax(200px, 1fr)); 
     }
 `
+
 
 const Cards = styled.div`
     border: 1px solid rgb(238, 238, 238);
@@ -91,7 +79,7 @@ const Cards = styled.div`
     transition: all 250ms;
     padding: 20px;
     cursor: pointer;
-
+    border: 1px solid #3E52CA;
 `
 
 const CardHead = styled.div`

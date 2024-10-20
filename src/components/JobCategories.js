@@ -40,6 +40,8 @@ const CategoriesCard = styled.div`
     display: grid;
     grid-gap: 25px;
     grid-template-columns: repeat(4, minmax(0, 1fr));
+    max-width: 1200px;
+    margin: 0 auto;
 
     @media (max-width: 1024px) {
         grid-template-columns: repeat(3, minmax(0, 1fr));
